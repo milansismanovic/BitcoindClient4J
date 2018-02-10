@@ -1,207 +1,224 @@
 package com._37coins.bcJsonRpc.pojo;
 
-import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
+import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
-@JsonInclude(Include.NON_NULL)
-//@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({ "amount", "fee", "confirmations", "blockhash", "blockindex", "blocktime", "txid",
+		"walletconflicts", "time", "timereceived", "bip125-replaceable", "details", "hex" })
 public class Transaction {
-	
-	public enum Category {
-	    RECEIVE("receive"),
-	    SEND("send"),
-	    CONFLICTED("conflicted"),
-	    MOVE("move");
-	    
-	    private String text;
 
-	    Category(String text) {
-	      this.text = text;
-	    }
-	    
-	    @JsonValue
-	    final String value() {
-	        return this.text;
-	    }
+	@JsonProperty("amount")
+	private Double amount;
+	@JsonProperty("fee")
+	private Double fee;
+	@JsonProperty("confirmations")
+	private Integer confirmations;
+	@JsonProperty("blockhash")
+	private String blockhash;
+	@JsonProperty("blockindex")
+	private Integer blockindex;
+	@JsonProperty("blocktime")
+	private Integer blocktime;
+	@JsonProperty("txid")
+	private String txid;
+	@JsonProperty("walletconflicts")
+	private List<Object> walletconflicts = null;
+	@JsonProperty("time")
+	private Integer time;
+	@JsonProperty("timereceived")
+	private Integer timereceived;
+	@JsonProperty("bip125-replaceable")
+	private String bip125Replaceable;
+	@JsonProperty("details")
+	private List<Detail> details = null;
+	@JsonProperty("hex")
+	private String hex;
+	@JsonIgnore
+	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-	    public String getText() {
-	      return this.text;
-	    }
-	    
-	    @JsonCreator
-	    public static Category fromString(String text) {
-	      if (text != null) {
-	        for (Category b : Category.values()) {
-	          if (text.equalsIgnoreCase(b.text)) {
-	            return b;
-	          }
-	        }
-	      }
-	      return null;
-	    }
-	}
-
-
-	private BigDecimal fee;
-	private BigDecimal amount;
-	private long blockindex;
-	private Category category;
-	private long confirmations;
-	private long time;
-	private long timereceived;
-	private long blocktime;
-	private List<String> walletconflicts;
-	private List<Transaction> details;
-	private String address;
-    private String txid;
-    private long block;
-    private String hex;
-    private String blockhash;
-    private String account;
-    private String otheraccount;
-    private String comment;
-    private String to;
-    
-    
-	public String getOtheraccount() {
-		return otheraccount;
-	}
-	public Transaction setOtheraccount(String otheraccount) {
-		this.otheraccount = otheraccount;
-		return this;
-	}
-	public String getComment() {
-		return comment;
-	}
-	public Transaction setComment(String comment) {
-		this.comment = comment;
-		return this;
-	}
-	public BigDecimal getFee() {
-		return fee;
-	}
-	public Transaction setFee(BigDecimal fee) {
-		this.fee = fee;
-		return this;
-	}
-	public BigDecimal getAmount() {
+	@JsonProperty("amount")
+	public Double getAmount() {
 		return amount;
 	}
-	public Transaction setAmount(BigDecimal amount) {
+
+	@JsonProperty("amount")
+	public void setAmount(Double amount) {
 		this.amount = amount;
-		return this;
 	}
-	public long getBlockindex() {
-		return blockindex;
+
+	@JsonProperty("fee")
+	public Double getFee() {
+		return fee;
 	}
-	public List<String> getWalletconflicts() {
-		return walletconflicts;
+
+	@JsonProperty("fee")
+	public void setFee(Double fee) {
+		this.fee = fee;
 	}
-	public Transaction setWalletconflicts(List<String> walletconflicts) {
-		this.walletconflicts = walletconflicts;
-		return this;
-	}
-	public Transaction setBlockindex(long blockindex) {
-		this.blockindex = blockindex;
-		return this;
-	}
-	public Category getCategory() {
-		return category;
-	}
-	public Transaction setCategory(Category category) {
-		this.category = category;
-		return this;
-	}
-	public long getConfirmations() {
+
+	@JsonProperty("confirmations")
+	public Integer getConfirmations() {
 		return confirmations;
 	}
-	public Transaction setConfirmations(long confirmations) {
+
+	@JsonProperty("confirmations")
+	public void setConfirmations(Integer confirmations) {
 		this.confirmations = confirmations;
-		return this;
 	}
-	public String getAddress() {
-		return address;
-	}
-	public Transaction setAddress(String address) {
-		this.address = address;
-		return this;
-	}
-	public String getTxid() {
-		return txid;
-	}
-	public Transaction setTxid(String txid) {
-		this.txid = txid;
-		return this;
-	}
-	public long getBlock() {
-		return block;
-	}
-	public Transaction setBlock(long block) {
-		this.block = block;
-		return this;
-	}
-	
-	public String getHex() {
-		return hex;
-	}
-	public Transaction setHex(String hex) {
-		this.hex = hex;
-		return this;
-	}
+
+	@JsonProperty("blockhash")
 	public String getBlockhash() {
 		return blockhash;
 	}
-	public Transaction setBlockhash(String blockhash) {
+
+	@JsonProperty("blockhash")
+	public void setBlockhash(String blockhash) {
 		this.blockhash = blockhash;
-		return this;
 	}
-	public List<Transaction> getDetails() {
-		return details;
+
+	@JsonProperty("blockindex")
+	public Integer getBlockindex() {
+		return blockindex;
 	}
-	public Transaction setDetails(List<Transaction> details) {
-		this.details = details;
-		return this;
+
+	@JsonProperty("blockindex")
+	public void setBlockindex(Integer blockindex) {
+		this.blockindex = blockindex;
 	}
-	public String getAccount() {
-		return account;
-	}
-	public Transaction setAccount(String account) {
-		this.account = account;
-		return this;
-	}
-	public long getTime() {
-		return time;
-	}
-	public Transaction setTime(long time) {
-		this.time = time;
-		return this;
-	}
-	public long getTimereceived() {
-		return timereceived;
-	}
-	public Transaction setTimereceived(long timereceived) {
-		this.timereceived = timereceived;
-		return this;
-	}
-	public long getBlocktime() {
+
+	@JsonProperty("blocktime")
+	public Integer getBlocktime() {
 		return blocktime;
 	}
-	public Transaction setBlocktime(long blocktime) {
+
+	@JsonProperty("blocktime")
+	public void setBlocktime(Integer blocktime) {
 		this.blocktime = blocktime;
-		return this;
 	}
-	public String getTo() {
-		return to;
+
+	@JsonProperty("txid")
+	public String getTxid() {
+		return txid;
 	}
-	public Transaction setTo(String to) {
-		this.to = to;
-		return this;
+
+	@JsonProperty("txid")
+	public void setTxid(String txid) {
+		this.txid = txid;
 	}
-    
-    
+
+	@JsonProperty("walletconflicts")
+	public List<Object> getWalletconflicts() {
+		return walletconflicts;
+	}
+
+	@JsonProperty("walletconflicts")
+	public void setWalletconflicts(List<Object> walletconflicts) {
+		this.walletconflicts = walletconflicts;
+	}
+
+	@JsonProperty("time")
+	public Integer getTime() {
+		return time;
+	}
+
+	@JsonProperty("time")
+	public void setTime(Integer time) {
+		this.time = time;
+	}
+
+	@JsonProperty("timereceived")
+	public Integer getTimereceived() {
+		return timereceived;
+	}
+
+	@JsonProperty("timereceived")
+	public void setTimereceived(Integer timereceived) {
+		this.timereceived = timereceived;
+	}
+
+	@JsonProperty("bip125-replaceable")
+	public String getBip125Replaceable() {
+		return bip125Replaceable;
+	}
+
+	@JsonProperty("bip125-replaceable")
+	public void setBip125Replaceable(String bip125Replaceable) {
+		this.bip125Replaceable = bip125Replaceable;
+	}
+
+	@JsonProperty("details")
+	public List<Detail> getDetails() {
+		return details;
+	}
+
+	@JsonProperty("details")
+	public void setDetails(List<Detail> details) {
+		this.details = details;
+	}
+
+	@JsonProperty("hex")
+	public String getHex() {
+		return hex;
+	}
+
+	@JsonProperty("hex")
+	public void setHex(String hex) {
+		this.hex = hex;
+	}
+
+	@JsonAnyGetter
+	public Map<String, Object> getAdditionalProperties() {
+		return this.additionalProperties;
+	}
+
+	@JsonAnySetter
+	public void setAdditionalProperty(String name, Object value) {
+		this.additionalProperties.put(name, value);
+	}
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this).append("amount", amount).append("fee", fee)
+				.append("confirmations", confirmations).append("blockhash", blockhash).append("blockindex", blockindex)
+				.append("blocktime", blocktime).append("txid", txid).append("walletconflicts", walletconflicts)
+				.append("time", time).append("timereceived", timereceived)
+				.append("bip125Replaceable", bip125Replaceable).append("details", details).append("hex", hex)
+				.append("additionalProperties", additionalProperties).toString();
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(confirmations).append(blockhash).append(blocktime).append(fee)
+				.append(amount).append(bip125Replaceable).append(blockindex).append(time).append(hex).append(details)
+				.append(timereceived).append(additionalProperties).append(txid).append(walletconflicts).toHashCode();
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		if (other == this) {
+			return true;
+		}
+		if ((other instanceof Transaction) == false) {
+			return false;
+		}
+		Transaction rhs = ((Transaction) other);
+		return new EqualsBuilder().append(confirmations, rhs.confirmations).append(blockhash, rhs.blockhash)
+				.append(blocktime, rhs.blocktime).append(fee, rhs.fee).append(amount, rhs.amount)
+				.append(bip125Replaceable, rhs.bip125Replaceable).append(blockindex, rhs.blockindex)
+				.append(time, rhs.time).append(hex, rhs.hex).append(details, rhs.details)
+				.append(timereceived, rhs.timereceived).append(additionalProperties, rhs.additionalProperties)
+				.append(txid, rhs.txid).append(walletconflicts, rhs.walletconflicts).isEquals();
+	}
+
 }

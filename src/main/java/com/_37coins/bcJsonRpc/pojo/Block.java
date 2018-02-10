@@ -23,6 +23,11 @@ public class Block {
 	private long version;
 	private long size;
 	
+	private long strippedsize;
+	private long weight;
+	private String versionHex;
+	private long mediantime;
+	private String chainwork;
 	
 	public List<String> getTx() {
 		return tx;
@@ -103,4 +108,58 @@ public class Block {
 		this.nextblockhash = nextblockhash;
 	}
 	
+	public long getStrippedsize() {
+		return strippedsize;
+	}
+	public void setStrippedsize(long strippedsize) {
+		this.strippedsize = strippedsize;
+	}
+	public long getWeight() {
+		return weight;
+	}
+	public void setWeight(long weight) {
+		this.weight = weight;
+	}
+	public String getVersionHex() {
+		return versionHex;
+	}
+	public void setVersionHex(String versionHex) {
+		this.versionHex = versionHex;
+	}
+	public long getMediantime() {
+		return mediantime;
+	}
+	public void setMediantime(long mediantime) {
+		this.mediantime = mediantime;
+	}
+	public String getChainwork() {
+		return chainwork;
+	}
+	public void setChainwork(String chainwork) {
+		this.chainwork = chainwork;
+	}
+	@Override
+	public String toString() {
+		return "Block [\n"
+				+ "hash = "+hash+",\n"
+				+ "tx=" + tx +",\n"
+				+ "time=" + time +",\n"
+				+ "height=" + height +",\n"
+				+ "nonce=" + nonce +",\n"
+				+ "hash=" + hash+",\n"
+				+ "bits=" + bits +",\n"
+				+ "difficulty=" + difficulty+",\n" 
+				+ "merkleroot=" + merkleroot+",\n"
+				+ "previousblockhash=" + previousblockhash+",\n" 
+				+ "nextblockhash=" + nextblockhash +",\n"
+				+ "confirmations=" + confirmations +",\n"
+				+ "version=" + version +",\n"
+				+ "size=" + size +",\n"
+				+ "strippedsize=" + strippedsize +",\n"
+				+ "weight=" + weight +",\n"
+				+ "versionHex=" + versionHex +",\n"
+				+ "mediantime=" + mediantime +",\n"
+				+ "chainwork=" + chainwork +",\n"
+				+ "]";
+	}
 }

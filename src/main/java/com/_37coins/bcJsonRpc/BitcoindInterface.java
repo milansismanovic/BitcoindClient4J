@@ -10,6 +10,7 @@ import com._37coins.bcJsonRpc.pojo.AddressInformation;
 import com._37coins.bcJsonRpc.pojo.Block;
 import com._37coins.bcJsonRpc.pojo.Info;
 import com._37coins.bcJsonRpc.pojo.LastBlock;
+import com._37coins.bcJsonRpc.pojo.RawTransaction;
 import com._37coins.bcJsonRpc.pojo.Transaction;
 
 
@@ -19,7 +20,8 @@ public interface BitcoindInterface {
 	public String addmultisigaddress(int nrequired, String keys);
 	//If [account] is specified, assign address to [account].
 	public String addmultisigaddress(int nrequired, String keys, String account);
-	
+	// Returns hash of block in best-block-chain at height provided.
+	public String getblockhash(int height);
 	//Returns an object containing various state info.
 	public Info getinfo();
 	//Safely copies wallet.dat to destination, which can be a directory or a path with filename.
@@ -58,6 +60,10 @@ public interface BitcoindInterface {
 	public long gethashespersec();
 	//Returns an object about the given transaction hash.
 	public Transaction gettransaction(String hash);
+	//Returns an object about the given transaction hash.
+	public String getrawtransaction(String hash);
+	//Returns an object about the given transaction hash.
+	public RawTransaction decoderawtransaction(String transactonScript);
 	//Returns Object that has account names as keys, account balances as values.
 	public Map<String,BigDecimal> listaccounts(long confirmations);
 	//Returns an array of objects containing:"account" : the account of the receiving addresses,"amount" : total amount received by addresses with this account,"confirmations" : number of confirmations of the most recent transaction included
