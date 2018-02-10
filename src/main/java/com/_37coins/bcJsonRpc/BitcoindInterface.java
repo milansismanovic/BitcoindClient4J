@@ -47,7 +47,7 @@ public interface BitcoindInterface {
 	//Returns information about the block with the given hash.
 	public Block getblock(String blockHash);
 	//Returns the number of blocks in the longest block chain.
-	public long getblockcount();
+	public int getblockcount();
 	//Returns hash of block in best-block-chain at <index>; index 0 is the genesis block
 	public String getblockhash(long blockHeight);
 	//Returns the number of connections to other nodes.
